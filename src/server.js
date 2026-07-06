@@ -1,6 +1,6 @@
 const wst = require("./app"); //import app( wst ) from app.js
 const dotenv = require("dotenv");  //import dotenv
-const dbConnect = require("../src/config/db"); //import dbConnect function from db.js
+const dbConnect = require("./config/db"); //import dbConnect function from db.js
 
 dotenv.config(); //configure dotenv to load environment variables from .env file
 dbConnect(); //connect to MongoDB using the dbConnect function
