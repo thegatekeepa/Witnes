@@ -1,6 +1,6 @@
-const wst = require("./app"); //import app( wst ) from app.js
-const dotenv = require("dotenv");  //import dotenv
-const dbConnect = require("./config/db"); //import dbConnect function from db.js
+import app from "./app.js"; //import app( wst ) from app.js
+import dotenv from "dotenv";  //import dotenv
+import dbConnect from "./config/db.js"; //import dbConnect function from db.js
 
 dotenv.config(); //configure dotenv to load environment variables from .env file
 dbConnect(); //connect to MongoDB using the dbConnect function
@@ -8,7 +8,7 @@ dbConnect(); //connect to MongoDB using the dbConnect function
 
 
 const PORT = process.env.WST_PORT || 2110;
-  wst.listen(PORT, () => {
+  app.listen(PORT, () => {
     console.log(
         `Witnes Server is now live on ${PORT}`
     );

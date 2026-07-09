@@ -1,10 +1,10 @@
 //app.js -- app is reffered to as wst (Witnes Session Tracker) in this project
-const express = require("express");  //import express
-const wst = express();
-wst.use(express.json());
+import express from "express";  //import express
+const app = express();
+app.use(express.json());
 
 //display app in browser 
-wst.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send(
     "Hey There! Thank you for using Witnes, the Session Tracker API."
 );
@@ -31,4 +31,4 @@ wst.get("/", (req, res) => {
 //wst.use("/api/proof/delivery", prodRouter);
 //wst.use("/api/history/delivery", dhRouter);
 
-module.exports = wst;
+export default app;
