@@ -1,6 +1,6 @@
 //client status constant
-export const CLIENT_STATUS = [
-    "ACTIVE",
-    "SUSPENDED",
-    "REVOKED"
-];
+export const CLIENT_STATUS = {
+    active: "ACTIVE",
+    suspended: "SUSPENDED",
+    revoked: "REVOKED"
+};

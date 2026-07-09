@@ -30,7 +30,7 @@ const clientSchema = new mongoose.Schema (
         clientStatus: {
             type: String,
             enum: Object.values(CLIENT_STATUS),
-            default: CLIENT_STATUS.ACTIVE
+            default: CLIENT_STATUS.active
         },
         
         lastUsedAt: { 
