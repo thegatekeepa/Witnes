@@ -27,6 +27,13 @@ const clientSchema = new mongoose.Schema (
             required: true
          },
 
+         apiKeyTag: {
+            type: String, 
+            required: true, 
+            unique: true, 
+            index: true
+         },
+
         clientStatus: {
             type: String,
             enum: Object.values(CLIENT_STATUS),

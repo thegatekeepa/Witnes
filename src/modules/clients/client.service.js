@@ -16,8 +16,8 @@ const registerClientService = async (clientData) => {
       409,
       "A client with the provided email already exists"
     )};
-    //generate apiKey
-    const apiKey = newApiKey();
+    //generate apiKey and create apiKeyTag
+    const { apiKey, apiKeyTag } = newApiKey();
 
     //hash apiKey
     const saltRounds = Number(process.env.BCRYPT_SALT_ROUNDS);
@@ -28,6 +28,7 @@ const registerClientService = async (clientData) => {
       clientName: clientData.clientName, 
       email: clientData.email, 
       companyName: clientData.companyName, 
+      apiKeyTag,
       apiKeyHash
     });
     
