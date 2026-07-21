@@ -1,9 +1,9 @@
 import crypto from "crypto";
 
 const generateSessionId = () => {
-    const secret = crypto.randomBytes(18).toString("hex");
+    const secret = crypto.randomBytes(9).toString("hex");
 
-    const sessionId = `sid.${secret}`;
+    const sessionId = `wstsid.${secret}`;
 
     return sessionId;
 };

@@ -1,6 +1,4 @@
-//import {z} from "zod";
-
-const clientValidator = (schema) => {
+const validator = (schema) => {
     return (req, res, next) => {
         const result = schema.safeParse(req.body);
 
@@ -22,4 +20,4 @@ const clientValidator = (schema) => {
     };
 };
 
-export default clientValidator;
+export default validator;

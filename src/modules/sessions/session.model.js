@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { SESSION_STATUS } from "../../utils/constants.js";
+import Client from "../clients/client.model.js" //iported client because the terminal was throwing error "Client not defined in session model". 
 
 const sessionSchema = new mongoose.Schema (
     {
@@ -38,6 +39,11 @@ const sessionSchema = new mongoose.Schema (
         },
 
         revokedAt: { 
+            type: Date, 
+            default: null
+        },
+
+        expiresAt: {
             type: Date, 
             default: null
         },

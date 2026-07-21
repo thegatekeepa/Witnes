@@ -12,21 +12,19 @@ app.get("/", (req, res) => {
 
 
 import clRouter from "../src/modules/clients/client.route.js";
-//const userRouter = require("./src/routes/user.routes");
-//const deliRouter = require("./src/routes/delivery.routes");
-//const prodRouter = require("./src/routes/proD.routes");
-//const dhRouter = require("./src/routes/deliveryHistory.routes");
+import sessRouter from "../src/modules/sessions/session.route.js";
 import errorHandler from "./middleware/error.middleware.js";
 
+
+
+
 app.use("/api/v1/client", clRouter);
-//wst.use("/api/getlistof", userRouter);
-//wst.use("/api/get", userRouter);
-//wst.use("/api/profile/update", userRouter);
-//wst.use("/api/profile", userRouter);
-//wst.use("/api/delivery", deliRouter);
-//wst.use("/api/update", deliRouter);
-//wst.use("/api/proof/delivery", prodRouter);
-//wst.use("/api/history/delivery", dhRouter);
+app.use("/api/v1/sessions", sessRouter);
+
+
+
+
+
 app.use(errorHandler);
 
 export default app;
