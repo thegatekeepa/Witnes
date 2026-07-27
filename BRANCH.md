@@ -28,7 +28,7 @@ Every feature that is implemented in this branch must directly support the sessi
 
 # Scope Definition (to be Included)
 
-## Client Management
+## Client Management ✅
 
 * Client registration
 * API Key generation
@@ -113,7 +113,7 @@ The following features are intentionally excluded from Version 1 and will be imp
 The `devWitnessv1` branch will be considered complete when:
 
 * All planned endpoints are implemented.
-* API Key authentication is functional.
+* API Key authentication is functional. ✅
 * The complete session lifecycle is supported.
 * Activity logging works correctly.
 * Request validation is in place.

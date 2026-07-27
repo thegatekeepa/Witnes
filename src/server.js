@@ -8,8 +8,13 @@ dbConnect(); //connect to MongoDB using the dbConnect function
 
 
 const PORT = process.env.WST_PORT || 2110;
+try {
   app.listen(PORT, () => {
     console.log(
         `Witnes Server is now live on ${PORT}`
     );
   });
+} catch (error) {
+  console.error("Failed to connect to MongoDB", error);
+  process.exit();
+}
