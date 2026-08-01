@@ -1,6 +1,6 @@
 import Session from "./session.model.js";
 import generateSessionId from "../../utils/generateSessionId.js";
-import { SESSION_STATUS } from "../../utils/constants.js";
+import { SESSION_STATUS, SESSION_EVENTS } from "../../utils/constants.js";
 import ApiError from "../../utils/ApiError.js"; 
 import dotenv from "dotenv";
 
@@ -79,4 +79,34 @@ const getAllSessionsService = async ({client}) => {
     return sessions;
 };
 
-export { createSessionService, getSessionService, getAllSessionsService };
+//revoke session
+const revokeSessionService = async ({ sessionId, client }) => {
+    const revokedSession = await Session.findOneAndUpdate({
+        sessionId,
+        clientId: client._id.toString()
+    });
+
+    if(!revokedSession) {
+        throw new ApiError(404, "Session not found");
+    };
+
+    if(revokedSession.sessionStatus === SESSION_STATUS.revoked) {
+        throw new ApiError(400, "Session is already revoked");
+    };
+
+    if(revokedSession.sessionStatus === SESSION_STATUS.expired) {
+        throw new ApiError(400, "Session is expired and cannot be revoked");
+    }
+
+    revokedSession.sessionStatus = SESSION_STATUS.revoked;
+    revokedSession.revokedAt = new Date();
+    await revokedSession.save(); 
+
+    return {
+        sessionId: revokedSession.sessionId, 
+        sessionStatus: revokedSession.sessionStatus, 
+        revokedAt: revokedSession.revokedAt
+    };
+};
+
+export { createSessionService, getSessionService, getAllSessionsService, revokeSessionService  };

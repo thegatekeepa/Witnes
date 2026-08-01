@@ -1,15 +1,12 @@
 import express from "express";
 import { createSessionSchema, getSessionSchema } from "./session.validation.js";
-import { createSession } from "./session.controller.js";
+import { createSession, getSession, getAllSessions, revokeSession } from "./session.controller.js";
 import authenticateClient from "../../middleware/auth.middleware.js";
 import validator from "../../middleware/validate.middleware.js";
-import { getSession } from "./session.controller.js";
-import { getAllSessions } from "./session.controller.js";
-import { 
-    recordActivitySchema, 
-    activityParamsSchema 
+import {  recordActivitySchema, activityParamsSchema 
 } from "../sessionActivities/sessionActivities.validation.js";
-import { recordActivity, getSessionActivities } from "../sessionActivities/sessionActivities.controller.js";
+import { recordActivity, getSessionActivities 
+} from "../sessionActivities/sessionActivities.controller.js";
 
 const sessRouter = express.Router();
 
@@ -45,6 +42,13 @@ sessRouter.get(
     authenticateClient,
     validator(activityParamsSchema, "params"),
     getSessionActivities
+);
+
+sessRouter.patch(
+    "/:sessionId/revoke",
+    authenticateClient,
+    validator(getSessionSchema, "params"),
+    revokeSession
 );
 
 export default sessRouter;

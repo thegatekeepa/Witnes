@@ -1,6 +1,10 @@
-//review chatGpt suggest
-import { createSessionService, getSessionService, getAllSessionsService } from "./session.service.js";
-//import authenticateClient from "../../middleware/auth.middleware.js";
+import { 
+    createSessionService, 
+    getSessionService, 
+    getAllSessionsService, 
+    revokeSessionService 
+} from "./session.service.js";
+
 
 export const createSession = async (req, res, next) => {
     try {
@@ -50,6 +54,22 @@ export const getAllSessions = async (req, res, next) => {
             message: "All Sessions retrieved successfully.",
             data: result
         });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const revokeSession = async (req, res, next) => {
+    try {
+    const result = await revokeSessionService({
+        sessionId: req.params.sessionId,
+        client: req.client
+    });
+    return res.status(200).json({
+        success: true,
+        message: "Session revoked successfully.",
+        data: result
+    });
     } catch (error) {
         next(error);
     }
