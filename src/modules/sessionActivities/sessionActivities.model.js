@@ -44,10 +44,10 @@ const sessionActivitySchema = new mongoose.Schema (
     }
 );
 
-const SessionActivities = mongoose.model(
-    "SessionActivities",
+const SessionActivity = mongoose.model(
+    "SessionActivity",
     sessionActivitySchema
 );
 
-export default SessionActivities;
+export default SessionActivity;
 

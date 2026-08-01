@@ -1,55 +1,21 @@
-//review chatGpt suggest
-import { createSessionService, getSessionService, getAllSessionsService } from "./session.service.js";
-//import authenticateClient from "../../middleware/auth.middleware.js";
+import recordSAS from "./sessionActivities.service.js";
 
-export const createSession = async (req, res, next) => {
+export const recordActivity = async (req, res, next) => {
     try {
 
-        const result = await createSessionService({
-            client: req.client,
-            userId: req.body.userId,
-            ipAddress: req.ip,
-            userAgent: req.header("user-agent")
+        const result = await recordSAS({
+            sessionId: req.params.sessionId,
+            event: req.body.event,
+            metadata: req.body.metadata,
+            client: req.client
         });
 
         return res.status(201).json({
             success: true,
-            message: "Session created successfully.",
+            message: "Activity recorded successfully.",
             data: result
         });
 
-    } catch (error) {
-        next(error);
-    }
-};
-
-export const getSession = async (req, res, next) => {
-    try {
-        const result = await getSessionService({
-            sessionId: req.params.sessionId,
-            client: req.client
-        });
-        return res.status(200).json({
-            success: true,
-            message: "Session retrieved successfully.",
-            data: result
-        });
-    } catch (error) {
-        next(error);
-    }
-
-};
-
-export const getAllSessions = async (req, res, next) => {
-    try {
-        const result = await getAllSessionsService({
-            client: req.client._id
-        });
-        return res.status(200).json({
-            success: true, 
-            message: "All Sessions retrieved successfully.",
-            data: result
-        });
     } catch (error) {
         next(error);
     }

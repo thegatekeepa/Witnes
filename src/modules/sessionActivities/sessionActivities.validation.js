@@ -1,19 +1,20 @@
 import { z } from "zod";
+import { SESSION_EVENTS } from "../../utils/constants.js";
 
-export const createSessionSchema = z.object({
-    userId: z
-        .string()
-        .trim()
-        .min(1, "User ID is Required")
-        .max(216, "User ID cannot exceed 216 characters")
+export const recordActivitySchema = z.object({
+    event: z
+    .enum(Object.values(SESSION_EVENTS)),
+
+    metadata: z
+    .object({})
+    .passthrough()
+    .optional()    
 });
 
-
-
-export const getSessionSchema = z.object({
+export const activityParamsSchema = z.object({
     sessionId: z
     .string()
     .trim()
     .min(1, "Session ID is Required")
-    .max(216, "Session ID cannot exceed 216 characters")
+    .max(48, "Invalid Session ID")
 });

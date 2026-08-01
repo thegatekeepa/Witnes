@@ -1,11 +1,11 @@
 import Session from "../sessions/session.model.js";
-import sessionActivities from "../sessionActivities/sessionActivities.model.js";
+import sessionActivity from "./sessionActivities.model.js";
 import generateActivityId from "../../utils/generateAID.js";
-import { SESSION_EVENTS } from "../../utils/constants.js";
+import { SESSION_EVENTS, SESSION_STATUS } from "../../utils/constants.js";
 import ApiError from "../../utils/ApiError.js"; 
-import dotenv from "dotenv";
 
-//SAS = Session Activities Service
+
+//SAS = Session Activity Service
 const recordSAS = async ({
     sessionId,
     event,
@@ -14,23 +14,33 @@ const recordSAS = async ({
 }) => {
 
     //find the session
-    const session = await Session.findOne ({ sessionId });
+    const session = await Session.findOne ({ 
+        sessionId, 
+        clientId: client._id.toString()
+     });
 
     if(!session) {
         throw new ApiError(404, 
-            "Sessioon not found. Can't create session activity without a valid session."
+            "Session not found. Can't create session activity without a valid session."
+        );
+    }
+    
+    //confirm that session is active before recording activity
+    if (session.sessionStatus !== SESSION_STATUS.active) {
+        throw new ApiError(400, 
+            "Can't record activity for a session that is not active."
         );
     }
 
-    //create activity Id
+    //create/generate activity Id
     const activityId = generateActivityId();
 
     //create session activity
-    const activity = await sessionActivities.create({
+    const activity = await sessionActivity.create({
         sessionId: session.sessionId,
-        clientId: client._id,
+        clientId: session.clientId, //._id -- check later if this is correct
         userId: session.userId,
-        //activityId,
+        activityId,
         event,
         metadata
     });
