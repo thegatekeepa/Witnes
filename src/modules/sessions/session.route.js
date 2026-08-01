@@ -3,6 +3,7 @@ import { createSessionSchema } from "./session.validation.js";
 import { createSession } from "./session.controller.js";
 import authenticateClient from "../../middleware/auth.middleware.js";
 import validator from "../../middleware/validate.middleware.js";
+import { getSessionSchema } from "./session.validation.js";
 
 const sessRouter = express.Router();
 

@@ -1,6 +1,7 @@
-const validator = (schema) => {
+//this validator is built to validate regarding of the source of the data; body, query, params, etc.
+const validator = (schema, source = "body") => {
     return (req, res, next) => {
-        const result = schema.safeParse(req.body);
+        const result = schema.safeParse(req[source]);
 
         if (!result.success) {
             return res.status(400).json({
@@ -13,8 +14,7 @@ const validator = (schema) => {
             });
         }
 
-        // Replace req.body with the validated/transformed data
-        req.body = result.data;
+        req[source] = result.data;
 
         next();
     };

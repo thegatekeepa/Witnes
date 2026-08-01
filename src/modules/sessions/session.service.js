@@ -1,6 +1,7 @@
 import Session from "./session.model.js";
 import generateSessionId from "../../utils/generateSessionId.js";
 import { SESSION_STATUS } from "../../utils/constants.js";
+import ApiError from "../../utils/ApiError.js"; 
 import dotenv from "dotenv";
 
 const createSessionService = async ({
@@ -42,4 +43,30 @@ const createSessionService = async ({
     };
 };
 
-export default createSessionService;
+//retrieve session
+const getSessionService = async ({sessionId, client}) => {
+    const session = await Session.findOne({
+        sessionId, 
+        clientId: client._id
+    });
+
+    if(!session) {
+        throw new ApiError(404, "Session not found");
+    }
+
+    return {
+        sessionId: session.sessionId,
+        clientId: session.clientId,
+        userId: session.userId,
+        sessionStatus: session.sessionStatus,
+        ipAddress: session.ipAddress,
+        userAgent: session.userAgent,
+        expiresAt: session.expiresAt,
+        revokedAt: session.revokedAt,
+        createdAt: session.createdAt,
+    };
+};
+
+
+
+export default { createSessionService, getSessionService };
