@@ -67,5 +67,16 @@ const getSessionService = async ({sessionId, client}) => {
     };
 };
 
+const getAllSessionsService = async ({client}) => {
+    const sessions = await Session.find({
+        clientId: client._id
+    });
 
-export { createSessionService, getSessionService };
+    if(!sessions) {
+        throw new ApiError(404, "Sessions not found");
+    }
+
+    return sessions;
+};
+
+export { createSessionService, getSessionService, getAllSessionsService };

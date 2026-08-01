@@ -5,6 +5,8 @@ import authenticateClient from "../../middleware/auth.middleware.js";
 import validator from "../../middleware/validate.middleware.js";
 import { getSessionSchema } from "./session.validation.js";
 import { getSession } from "./session.controller.js";
+//import { getAllSessionsSchema } from "./session.validation.js";
+import { getAllSessions } from "./session.controller.js";
 
 const sessRouter = express.Router();
 
@@ -19,6 +21,12 @@ sessRouter.get(
     authenticateClient, 
     validator(getSessionSchema, "params"),
     getSession
+);
+
+sessRouter.get(
+    "/", 
+    authenticateClient, 
+    getAllSessions
 );
 
 export default sessRouter;
