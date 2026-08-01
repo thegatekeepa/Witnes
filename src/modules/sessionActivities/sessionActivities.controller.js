@@ -1,4 +1,4 @@
-import recordSAS from "./sessionActivities.service.js";
+import { recordSAS, getSessionActivityHistory } from "./sessionActivities.service.js";
 
 export const recordActivity = async (req, res, next) => {
     try {
@@ -16,6 +16,23 @@ export const recordActivity = async (req, res, next) => {
             data: result
         });
 
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getSessionActivities = async (req, res, next) => {
+    try {
+        const result = await getSessionActivityHistory({
+            sessionId: req.params.sessionId,
+            client: req.client
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Retrieved session activities successfully.",
+            data: result
+        });
     } catch (error) {
         next(error);
     }

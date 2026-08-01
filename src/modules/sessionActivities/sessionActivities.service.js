@@ -54,4 +54,41 @@ const recordSAS = async ({
     };
 };
 
-export default recordSAS;
+//retrieve session activity history for a session
+
+const getSessionActivityHistory = async ({sessionId, client}) => {
+    const session = await Session.findOne({
+    sessionId,
+    clientId: client._id.toString()
+    });
+
+    if(!session) {
+        throw new ApiError(404,
+            "Session not found. Cannot retrieve session activity history without a valid session."
+        );
+    }
+
+    const activities = await sessionActivity.find({
+        sessionId: session.sessionId,
+    }).sort({ createdAt: -1 }); //to sort by most recent first
+
+    if(activities.length === 0) { 
+        //no activities 
+        }
+
+    return {
+        sessionId: session.sessionId,
+        userId: session.userId,
+        sessionStatus: session.sessionStatus,
+        activities: activities.map(activity => ({ //map through activities to return only relevant fields
+            activityId: activity.activityId,
+            event: activity.event,
+            metadata: activity.metadata,
+            createdAt: activity.createdAt
+        }))
+    };
+};
+
+
+
+export { recordSAS, getSessionActivityHistory };

@@ -9,7 +9,7 @@ import {
     recordActivitySchema, 
     activityParamsSchema 
 } from "../sessionActivities/sessionActivities.validation.js";
-import { recordActivity } from "../sessionActivities/sessionActivities.controller.js";
+import { recordActivity, getSessionActivities } from "../sessionActivities/sessionActivities.controller.js";
 
 const sessRouter = express.Router();
 
@@ -38,6 +38,13 @@ sessRouter.post(
     validator(activityParamsSchema, "params"),
     validator(recordActivitySchema),
     recordActivity
+);
+
+sessRouter.get(
+    "/:sessionId/activities",
+    authenticateClient,
+    validator(activityParamsSchema, "params"),
+    getSessionActivities
 );
 
 export default sessRouter;
