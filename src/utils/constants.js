@@ -12,3 +12,12 @@ export const SESSION_STATUS = {
     revoked: "REVOKED", 
     expired: "EXPIRED"
 };
+
+//session events constant
+export const SESSION_EVENTS = {
+    login: "LOGIN",
+    logout: "LOGOUT",
+    password_changed: "PASSWORD_CHANGED", 
+    profile_updated: "PROFILE_UPDATED",
+    token_refreshed: "TOKEN_REFRESHED"
+};

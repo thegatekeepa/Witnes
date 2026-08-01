@@ -30,15 +30,15 @@ Every feature that is implemented in this branch must directly support the sessi
 
 ## Client Management ✅
 
-* Client registration
-* API Key generation
-* API Key authentication middleware
+* Client registration✅
+* API Key generation✅
+* API Key authentication middleware✅
 
 ## Session Management
 
-* Create session
-* Retrieve session
-* List sessions
+* Create session✅
+* Retrieve session✅
+* List sessions✅
 * Revoke session
 * End session
 * Session expiration
@@ -54,13 +54,13 @@ Every feature that is implemented in this branch must directly support the sessi
 * Helmet
 * CORS
 * Rate limiting
-* Environment variable management
+* Environment variable management✅
 
 ## Validation
 
 * Request validation
 * Response consistency
-* Error handling
+* Error handling✅
 
 ## Documentation
 
