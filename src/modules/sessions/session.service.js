@@ -68,5 +68,4 @@ const getSessionService = async ({sessionId, client}) => {
 };
 
 
-
-export default { createSessionService, getSessionService };
+export { createSessionService, getSessionService };
