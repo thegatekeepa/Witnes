@@ -2,7 +2,8 @@ import {
     createSessionService, 
     getSessionService, 
     getAllSessionsService, 
-    revokeSessionService 
+    revokeSessionService, 
+    getSessionHistoryService 
 } from "./session.service.js";
 
 
@@ -70,6 +71,22 @@ export const revokeSession = async (req, res, next) => {
         message: "Session revoked successfully.",
         data: result
     });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getSessionHistory = async (req, res, next) => {
+    try {
+        const result = await getSessionHistoryService({
+            client: req.client,
+            userId: req.params.userId
+        });
+        return res.status(200).json({
+            success: true,
+            message: "Session history retrieved successfully.",
+            data: result
+        });
     } catch (error) {
         next(error);
     }

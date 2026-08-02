@@ -1,6 +1,10 @@
 import express from "express";
-import { createSessionSchema, getSessionSchema } from "./session.validation.js";
-import { createSession, getSession, getAllSessions, revokeSession } from "./session.controller.js";
+import { createSessionSchema, getSessionSchema, sessionHistorySchema } from "./session.validation.js";
+import { createSession, 
+    getSession, 
+    getAllSessions, 
+    revokeSession, 
+    getSessionHistory } from "./session.controller.js";
 import authenticateClient from "../../middleware/auth.middleware.js";
 import validator from "../../middleware/validate.middleware.js";
 import {  recordActivitySchema, activityParamsSchema 
@@ -49,6 +53,13 @@ sessRouter.patch(
     authenticateClient,
     validator(getSessionSchema, "params"),
     revokeSession
+);
+
+sessRouter.get(
+    "/history/:userId",
+    authenticateClient,
+    validator(sessionHistorySchema, "params"),
+    getSessionHistory
 );
 
 export default sessRouter;

@@ -7,7 +7,7 @@ const dbConnect = async () => {
         "Witnes is now connected to MongoDB."
     );
   } catch (error) {
-    console.error(error);
+    console.error("MongogDB Connection Failed:", error.message);
     process.exit(1);
   }
 };

@@ -20,5 +20,6 @@ export const SESSION_EVENTS = {
     password_changed: "PASSWORD_CHANGED", 
     profile_updated: "PROFILE_UPDATED",
     token_refreshed: "TOKEN_REFRESHED" ,
-    session_revoked: "SESSION_REVOKED"
+    session_revoked: "SESSION_REVOKED", 
+    session_expired: "SESSION_EXPIRED"
 };

@@ -109,4 +109,30 @@ const revokeSessionService = async ({ sessionId, client }) => {
     };
 };
 
-export { createSessionService, getSessionService, getAllSessionsService, revokeSessionService  };
+//get session history
+const getSessionHistoryService = async ({ client, userId }) => {
+    const sessions = await Session.find({
+        clientId: client._id,
+        userId
+    }).sort({ createdAt: -1 });
+
+    return {
+        userId,
+        totalSessions: sessions.length,
+        sessions: sessions.map((session) => ({
+            sessionId: session.sessionId,
+            sessionStatus: session.sessionStatus,
+            ipAddress: session.ipAddress,
+            userAgent: session.userAgent,
+            createdAt: session.createdAt,
+            expiresAt: session.expiresAt,
+            revokedAt: session.revokedAt
+        }))
+    };
+};
+
+export { createSessionService, 
+    getSessionService, 
+    getAllSessionsService, 
+    revokeSessionService, 
+    getSessionHistoryService };
