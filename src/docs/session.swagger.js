@@ -107,3 +107,97 @@
  *         description: Internal server error.
  */
 
+
+/**
+ * @swagger
+ * /api/v1/sessions:
+ *   get:
+ *     summary: Retrieve all sessions
+ *     description: This endpoint retrieves all sessions belonging to an authenticated client.
+ *     tags:
+ *       - Sessions
+ *     security:
+ *       - ApiKeyAuth: []
+ *
+ *     responses:
+ *       200:
+ *         description: All sessions retrieved successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: All Sessions retrieved successfully.
+ *               data:
+ *                 - sessionId: wstsid.ecc717176cdafc5253
+ *                   clientId: 6a5033d4cb33826e639a7fea
+ *                   userId: usr_007
+ *                   sessionStatus: ACTIVE
+ *                   ipAddress: "::1"
+ *                   userAgent: PostmanRuntime/7.56.0
+ *                   revokedAt: null
+ *                   expiresAt: "2026-08-02T18:27:50.921Z"
+ *                   createdAt: "2026-08-01T18:27:50.925Z"
+ *
+ *                 - sessionId: wstsid.0a7e308b372552bab1
+ *                   clientId: 6a5033d4cb33826e639a7fea
+ *                   userId: usr_004
+ *                   sessionStatus: ACTIVE
+ *                   ipAddress: "::1"
+ *                   userAgent: PostmanRuntime/7.56.0
+ *                   revokedAt: null
+ *                   expiresAt: "2026-08-02T18:28:55.722Z"
+ *                   createdAt: "2026-08-01T18:28:55.723Z"
+ *
+ *       401:
+ *         description: API Key is missing or invalid.
+ *
+ *       500:
+ *         description: Internal server error.
+ */
+
+
+/**
+ * @swagger
+ * /api/v1/sessions/{sessionId}/revoke:
+ *   patch:
+ *     summary: Revoke a session
+ *     description: This endpoint revokes an active session belonging to an authenticated client. A revoked session can no longer be used.
+ *     tags:
+ *       - Sessions
+ *     security:
+ *       - ApiKeyAuth: []
+ *
+ *     parameters:
+ *       - in: path
+ *         name: sessionId
+ *         required: true
+ *         description: The unique session identifier.
+ *         schema:
+ *           type: string
+ *           example: wstsid.f71cf5eb990d4dac8d
+ *
+ *     responses:
+ *       200:
+ *         description: Session revoked successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Session revoked successfully.
+ *               data:
+ *                 sessionId: wstsid.f71cf5eb990d4dac8d
+ *                 sessionStatus: REVOKED
+ *                 revokedAt: "2026-08-01T22:00:51.981Z"
+ *
+ *       400:
+ *         description: Session is already revoked.
+ *
+ *       401:
+ *         description: API Key is missing or invalid.
+ *
+ *       404:
+ *         description: Session not found.
+ *
+ *       500:
+ *         description: Internal server error.
+ */
