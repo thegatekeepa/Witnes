@@ -3,6 +3,9 @@ import express from "express";  //import express
 import helmet from "helmet";
 import cors from "cors";
 import apiRateLimiter from "./middleware/rateLimit.middleware.js";
+//swagger import and config
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./docs/swagger.js";
 
 
 
@@ -11,6 +14,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(apiRateLimiter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //display app in browser 
 app.get("/", (req, res) => {
