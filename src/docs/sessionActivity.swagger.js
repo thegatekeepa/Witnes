@@ -102,3 +102,61 @@
  */
 
 
+/**
+ * @swagger
+ * /api/v1/sessions/{sessionId}/activities:
+ *   get:
+ *     summary: Retrieve session activity history
+ *     description: This endpoint retrieves all recorded activities for a specific session belonging to the authenticated client.
+ *     tags:
+ *       - Session Activities
+ *     security:
+ *       - ApiKeyAuth: []
+ *
+ *     parameters:
+ *       - in: path
+ *         name: sessionId
+ *         required: true
+ *         description: The unique session identifier.
+ *         schema:
+ *           type: string
+ *           example: wstsid.f71cf5eb990d4dac8d
+ *
+ *     responses:
+ *       200:
+ *         description: Session activities retrieved successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Retrieved session activities successfully.
+ *               data:
+ *                 sessionId: wstsid.f71cf5eb990d4dac8d
+ *                 userId: usr_007
+ *                 sessionStatus: ACTIVE
+ *                 activities:
+ *                   - activityId: wsaid.2daa872613400f3701
+ *                     event: LOGIN
+ *                     metadata: {}
+ *                     createdAt: "2026-08-01T18:03:28.669Z"
+ *
+ *                   - activityId: wsaid.66e74da20301a1cb3c
+ *                     event: PROFILE_UPDATED
+ *                     metadata:
+ *                       updatedFields:
+ *                         - email
+ *                         - phone
+ *                     createdAt: "2026-08-01T17:59:32.604Z"
+ *
+ *       401:
+ *         description: API Key is missing or invalid.
+ *
+ *       403:
+ *         description: You are not authorized to view this session's activities.
+ *
+ *       404:
+ *         description: Session not found.
+ *
+ *       500:
+ *         description: Internal server error.
+ */
