@@ -26,7 +26,7 @@
                  ▼
          Expire Sessions Job
 
->chart drawn using ChatGpt
+
 
 
 **Witnes** is a developer-focused Session Tracking API that enables applications to create, monitor, manage, and audit user sessions through a secure REST API.
