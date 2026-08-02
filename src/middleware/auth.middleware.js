@@ -34,6 +34,12 @@ const authenticateClient = async (req, res, next) => {
         const client = await Client.findOne({
             apiKeyTag
 });
+    if(!client) {
+        throw new ApiError(
+            401, 
+            "Invalid API Key"
+        );
+    }
 
         //verify the API key
         const isValid = await bcrypt.compare(
