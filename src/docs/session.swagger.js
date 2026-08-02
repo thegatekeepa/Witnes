@@ -201,3 +201,62 @@
  *       500:
  *         description: Internal server error.
  */
+
+
+/**
+ * @swagger
+ * /api/v1/sessions/history/{userId}:
+ *   get:
+ *     summary: Retrieve a user's session history
+ *     description: This endpoint retrieves all sessions that belong to a specific user under the authenticated client application. Note: Ownership is enforced, so only authenticated client can access this endpoint.
+ *     tags:
+ *       - Sessions
+ *     security:
+ *       - ApiKeyAuth: []
+ *
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: The user identifier whose session history should be retrieved.
+ *         schema:
+ *           type: string
+ *           example: usr_006
+ *
+ *     responses:
+ *       200:
+ *         description: Session history retrieved successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Session history retrieved successfully.
+ *               data:
+ *                 userId: usr_006
+ *                 totalSessions: 2
+ *                 sessions:
+ *                   - sessionId: wstsid.7b6e1a980f4d59baae
+ *                     sessionStatus: EXPIRED
+ *                     ipAddress: "::1"
+ *                     userAgent: PostmanRuntime/7.56.0
+ *                     createdAt: "2026-08-02T02:25:09.406Z"
+ *                     expiresAt: "2026-08-02T02:25:39.285Z"
+ *                     revokedAt: null
+ *
+ *                   - sessionId: wstsid.284889e258446ce1f9
+ *                     sessionStatus: EXPIRED
+ *                     ipAddress: "::1"
+ *                     userAgent: PostmanRuntime/7.56.0
+ *                     createdAt: "2026-08-02T02:21:30.179Z"
+ *                     expiresAt: "2026-08-02T02:22:00.055Z"
+ *                     revokedAt: null
+ *
+ *       401:
+ *         description: API Key is missing or invalid.
+ *
+ *       404:
+ *         description: No session history found for the specified user.
+ *
+ *       500:
+ *         description: Internal server error.
+ */
