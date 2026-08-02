@@ -6,13 +6,19 @@ const swaggerOptions = {
     info: {
       title: "Witnes API",
       version: "1.0",
-      description: 
-          "Developer-focused Session Tracking API. Witnes enables developer applications to create, monitor, revoke, and retrieve user sessions and session activities.", 
+      description: "Witnes is a developer-focused Session Tracking API that enables developer applications to create, monitor, revoke, and retrieve user sessions and session activities.",  
       contact: {
-        name: "Gatekeepa", 
-        url: "https://github.com/thegatekeepa", 
+        name: "Gatekeepa",
         url: "https://www.linkedin.com/in/david-caleb-a78b01356/"
-      }
+      },
+       license: {
+        name: "MIT License",
+        url: "https://opensource.org/licenses/MIT"
+    }, 
+    externalDocs: {
+    description: "View the GitHub Repository",
+    url: "https://github.com/thegatekeepa/Witnes"
+}
     },
 
     servers: [

@@ -208,7 +208,7 @@
  * /api/v1/sessions/history/{userId}:
  *   get:
  *     summary: Retrieve a user's session history
- *     description: This endpoint retrieves all sessions that belong to a specific user under the authenticated client application. Note: Ownership is enforced, so only authenticated client can access this endpoint.
+ *     description: This endpoint retrieves all sessions that belong to a specific user under the authenticated client application.
  *     tags:
  *       - Sessions
  *     security:
