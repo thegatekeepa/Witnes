@@ -5,7 +5,7 @@ import cors from "cors";
 import apiRateLimiter from "./middleware/rateLimit.middleware.js";
 //swagger import and config
 import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./docs/swagger.js";
+import swaggerSpec from "./config/swagger.js";
 
 
 
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(apiRateLimiter);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));  //use swagger
 
 //display app in browser 
 app.get("/", (req, res) => {
