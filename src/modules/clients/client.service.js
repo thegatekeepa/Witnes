@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import Client from "../clients/client.model.js";
 import newApiKey from "../../utils/generateApiKey.js";
-import ApiError from "../../utils/apiError.js";
+import ApiError from "../../utils/ApiError.js";
 
 const registerClientService = async (clientData) => {
   //check if client exists
