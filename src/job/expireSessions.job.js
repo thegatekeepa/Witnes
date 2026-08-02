@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import expireSessions from "../modules/sessions/expireSession.service.js";
+import expireSessions from "../modules/sessions/expiresession.service.js";
 
 const startExpireSessionsJob = () => {
     cron.schedule("* * * * *", async () => {

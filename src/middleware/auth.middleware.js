@@ -1,7 +1,7 @@
 //authenticate client middleware
 import bcrypt from "bcrypt";
 import Client from "../modules/clients/client.model.js";
-import ApiError from "../utils/apiError.js";
+import ApiError from "../utils/ApiError.js";
 import { CLIENT_STATUS, API_KEY_PREFIX } from "../utils/constants.js";
 
 
